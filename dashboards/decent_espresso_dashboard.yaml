@@ -1,0 +1,206 @@
+title: Decent Espresso
+views:
+  - title: Espresso
+    path: decent-espresso
+    icon: mdi:coffee-maker
+    cards:
+      - type: vertical-stack
+        cards:
+          - type: markdown
+            content: |
+              # Decent Espresso
+              Local control through the ReaPrime app
+
+          - type: grid
+            columns: 3
+            square: false
+            cards:
+              - type: tile
+                entity: binary_sensor.decent_espresso_app_online
+                name: App
+                icon: mdi:lan-connect
+                color: green
+              - type: tile
+                entity: binary_sensor.decent_espresso_machine_connected
+                name: Machine
+                icon: mdi:coffee-maker
+                color: brown
+              - type: tile
+                entity: binary_sensor.decent_espresso_scale_connected
+                name: Scale
+                icon: mdi:scale-balance
+                color: blue
+
+          - type: grid
+            columns: 2
+            square: false
+            cards:
+              - type: tile
+                entity: sensor.decent_espresso_machine_state
+                name: Machine state
+                icon: mdi:coffee-maker
+                color: brown
+              - type: tile
+                entity: select.decent_espresso_machine_mode
+                name: Machine mode
+                icon: mdi:tune-variant
+                features:
+                  - type: select-options
+
+      - type: grid
+        columns: 2
+        square: false
+        cards:
+          - type: gauge
+            entity: sensor.decent_espresso_pressure
+            name: Pressure
+            unit: bar
+            min: 0
+            max: 12
+            needle: true
+            severity:
+              green: 0
+              yellow: 7
+              red: 10
+          - type: gauge
+            entity: sensor.decent_espresso_flow
+            name: Flow
+            unit: mL/s
+            min: 0
+            max: 8
+            needle: true
+            severity:
+              green: 0
+              yellow: 4
+              red: 6
+          - type: gauge
+            entity: sensor.decent_espresso_group_temperature
+            name: Group temp
+            unit: C
+            min: 70
+            max: 105
+            needle: true
+            severity:
+              green: 88
+              yellow: 96
+              red: 101
+          - type: gauge
+            entity: sensor.decent_espresso_scale_weight
+            name: Scale
+            unit: g
+            min: 0
+            max: 60
+            needle: true
+            severity:
+              green: 0
+              yellow: 35
+              red: 50
+
+      - type: horizontal-stack
+        cards:
+          - type: button
+            entity: button.decent_espresso_auto_connect
+            name: Auto-connect
+            icon: mdi:connection
+            tap_action:
+              action: call-service
+              service: button.press
+              target:
+                entity_id: button.decent_espresso_auto_connect
+          - type: button
+            entity: button.decent_espresso_tare_scale
+            name: Tare
+            icon: mdi:scale-balance
+            tap_action:
+              action: call-service
+              service: button.press
+              target:
+                entity_id: button.decent_espresso_tare_scale
+          - type: button
+            entity: button.decent_espresso_stop_machine
+            name: Stop
+            icon: mdi:stop-circle-outline
+            tap_action:
+              action: call-service
+              service: button.press
+              target:
+                entity_id: button.decent_espresso_stop_machine
+
+      - type: entities
+        title: Shot Telemetry
+        show_header_toggle: false
+        entities:
+          - entity: sensor.decent_espresso_pressure
+            name: Pressure
+          - entity: sensor.decent_espresso_target_pressure
+            name: Target pressure
+          - entity: sensor.decent_espresso_flow
+            name: Flow
+          - entity: sensor.decent_espresso_target_flow
+            name: Target flow
+          - entity: sensor.decent_espresso_mix_temperature
+            name: Mix temperature
+          - entity: sensor.decent_espresso_target_mix_temperature
+            name: Target mix temperature
+          - entity: sensor.decent_espresso_profile_frame
+            name: Profile frame
+
+      - type: history-graph
+        title: Live Shot Curve
+        hours_to_show: 1
+        entities:
+          - entity: sensor.decent_espresso_pressure
+            name: Pressure
+          - entity: sensor.decent_espresso_flow
+            name: Flow
+          - entity: sensor.decent_espresso_scale_weight
+            name: Weight
+          - entity: sensor.decent_espresso_scale_flow
+            name: Weight flow
+
+      - type: grid
+        columns: 2
+        square: false
+        cards:
+          - type: entities
+            title: Scale
+            show_header_toggle: false
+            entities:
+              - sensor.decent_espresso_scale_weight
+              - sensor.decent_espresso_scale_flow
+              - sensor.decent_espresso_scale_timer
+              - sensor.decent_espresso_scale_battery
+              - button.decent_espresso_start_scale_timer
+              - button.decent_espresso_stop_scale_timer
+              - button.decent_espresso_reset_scale_timer
+          - type: entities
+            title: Tablet
+            show_header_toggle: false
+            entities:
+              - number.decent_espresso_display_brightness
+              - sensor.decent_espresso_display_brightness
+              - binary_sensor.decent_espresso_wake_lock
+              - binary_sensor.decent_espresso_wake_lock_override
+              - button.decent_espresso_request_wake_lock
+              - button.decent_espresso_release_wake_lock
+
+      - type: conditional
+        conditions:
+          - entity: binary_sensor.decent_espresso_cup_warmer_supported
+            state: "on"
+        card:
+          type: entities
+          title: Bengle Cup Warmer
+          show_header_toggle: false
+          entities:
+            - entity: number.decent_espresso_cup_warmer
+              name: Temperature
+
+      - type: entities
+        title: Connection
+        show_header_toggle: false
+        entities:
+          - binary_sensor.decent_espresso_scanning
+          - sensor.decent_espresso_connected_devices
+          - button.decent_espresso_scan_devices
+          - button.decent_espresso_auto_connect

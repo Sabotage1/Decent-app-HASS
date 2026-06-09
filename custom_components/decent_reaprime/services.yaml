@@ -1,0 +1,128 @@
+scan_devices:
+  name: Scan devices
+  description: Ask Decent Espresso to scan for machines and scales.
+  fields:
+    entry_id:
+      name: Entry ID
+      description: Optional config entry ID when multiple Decent Espresso apps are configured.
+      selector:
+        text:
+    connect:
+      name: Auto-connect
+      description: Let Decent Espresso connect to preferred or single discovered devices.
+      default: true
+      selector:
+        boolean:
+    quick:
+      name: Quick
+      description: Return immediately after starting the scan.
+      default: true
+      selector:
+        boolean:
+
+connect_device:
+  name: Connect device
+  description: Connect a discovered Decent Espresso device by ID.
+  fields:
+    entry_id:
+      name: Entry ID
+      selector:
+        text:
+    device_id:
+      name: Device ID
+      required: true
+      selector:
+        text:
+
+disconnect_device:
+  name: Disconnect device
+  description: Disconnect a Decent Espresso device by ID.
+  fields:
+    entry_id:
+      name: Entry ID
+      selector:
+        text:
+    device_id:
+      name: Device ID
+      required: true
+      selector:
+        text:
+
+set_machine_state:
+  name: Set machine state
+  description: Request a Decent machine state change through Decent Espresso.
+  fields:
+    entry_id:
+      name: Entry ID
+      selector:
+        text:
+    state:
+      name: State
+      required: true
+      selector:
+        select:
+          options:
+            - idle
+            - sleeping
+            - espresso
+            - steam
+            - hotWater
+            - flush
+            - steamRinse
+            - skipStep
+            - cleaning
+            - descaling
+
+tare_scale:
+  name: Tare scale
+  description: Tare the connected Decent Espresso scale.
+  fields:
+    entry_id:
+      name: Entry ID
+      selector:
+        text:
+
+scale_timer_start:
+  name: Start scale timer
+  description: Start the connected scale timer.
+  fields:
+    entry_id:
+      name: Entry ID
+      selector:
+        text:
+
+scale_timer_stop:
+  name: Stop scale timer
+  description: Stop the connected scale timer.
+  fields:
+    entry_id:
+      name: Entry ID
+      selector:
+        text:
+
+scale_timer_reset:
+  name: Reset scale timer
+  description: Reset the connected scale timer.
+  fields:
+    entry_id:
+      name: Entry ID
+      selector:
+        text:
+
+set_cup_warmer:
+  name: Set cup warmer
+  description: Set Bengle cup warmer temperature in Celsius. Use 0 to turn it off.
+  fields:
+    entry_id:
+      name: Entry ID
+      selector:
+        text:
+    temperature:
+      name: Temperature
+      required: true
+      selector:
+        number:
+          min: 0
+          max: 80
+          step: 1
+          unit_of_measurement: C

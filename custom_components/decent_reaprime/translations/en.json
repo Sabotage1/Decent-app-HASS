@@ -1,0 +1,33 @@
+{
+  "config": {
+    "step": {
+      "user": {
+        "title": "Connect to Decent Espresso",
+        "description": "Enter the IP address or hostname of the tablet or computer running the ReaPrime/Decent Espresso app.",
+        "data": {
+          "name": "Name",
+          "host": "Host",
+          "port": "Port"
+        }
+      }
+    },
+    "error": {
+      "cannot_connect": "Could not connect to Decent Espresso. Confirm the app is running and port 8080 is reachable from Home Assistant.",
+      "invalid_response": "Decent Espresso responded, but not with the expected API response.",
+      "unknown": "Unexpected error"
+    },
+    "abort": {
+      "already_configured": "This Decent Espresso app is already configured"
+    }
+  },
+  "options": {
+    "step": {
+      "init": {
+        "title": "Decent Espresso options",
+        "data": {
+          "scan_interval": "REST refresh interval"
+        }
+      }
+    }
+  }
+}
