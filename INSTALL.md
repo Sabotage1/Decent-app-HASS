@@ -34,7 +34,43 @@ curl http://192.168.1.50:8080/api/v1/devices
 
 Replace `192.168.1.50` with the IP address of your tablet or computer. If the API is reachable, you should get a JSON response.
 
-## Step 2: Install in Home Assistant
+## One-Command Automated Install
+
+If you have Terminal/SSH access to Home Assistant, this is the easiest path.
+It installs the integration, registers the dashboard, and asks for the
+ReaPrime/Decent Espresso app IP address at the end.
+
+Run this from the Home Assistant terminal:
+
+```bash
+curl -fsSL https://raw.githubusercontent.com/Sabotage1/Decent-app-HASS/main/scripts/install.sh | bash
+```
+
+If your Home Assistant config directory is not `/config`, set it explicitly:
+
+```bash
+curl -fsSL https://raw.githubusercontent.com/Sabotage1/Decent-app-HASS/main/scripts/install.sh | HA_CONFIG_DIR=/path/to/config bash
+```
+
+When the script asks:
+
+```text
+Enter the ReaPrime/Decent Espresso app IP or hostname:
+```
+
+enter the IP address of the tablet or computer running the app, for example:
+
+```text
+192.168.1.50
+```
+
+Then restart Home Assistant. After restart, Home Assistant imports the Decent
+Espresso integration from YAML and shows the dashboard in the sidebar.
+
+The script creates a backup of `configuration.yaml` before merging with an
+existing `lovelace:` or `decent_reaprime:` block.
+
+## Manual Install in Home Assistant
 
 ### Option A: HACS Custom Repository
 
@@ -64,7 +100,7 @@ Into your Home Assistant config folder:
 
 Then restart Home Assistant.
 
-## Step 3: Add the Integration
+## Add the Integration Manually
 
 1. Go to **Settings -> Devices & services**.
 2. Click **Add integration**.
@@ -74,6 +110,9 @@ Then restart Home Assistant.
 6. Click **Submit**.
 
 If setup succeeds, Home Assistant will create a **Decent Espresso** device with sensors and controls.
+
+If you used the one-command automated installer, you can skip this manual add
+step. The integration is imported from `configuration.yaml` after restart.
 
 ## Optional Dashboard
 

@@ -20,6 +20,16 @@ The connector is based on ReaPrime `v0.7.6`, which exposes REST endpoints under 
 
 ## Installation
 
+### One-command automated install
+
+From the Home Assistant terminal:
+
+```bash
+curl -fsSL https://raw.githubusercontent.com/Sabotage1/Decent-app-HASS/main/scripts/install.sh | bash
+```
+
+The script installs the custom integration, installs the dashboard, then asks for the ReaPrime/Decent Espresso app IP address at the end. Restart Home Assistant when it finishes.
+
 ### HACS custom repository
 
 1. In HACS, add this repository as a custom integration repository.

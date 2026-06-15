@@ -95,6 +95,25 @@ class DecentReaPrimeConfigFlow(config_entries.ConfigFlow, domain=DOMAIN):
             errors=errors,
         )
 
+    async def async_step_import(self, import_data: dict[str, Any]) -> FlowResult:
+        """Import Decent Espresso from YAML configuration."""
+        data = {
+            CONF_NAME: DEFAULT_NAME,
+            CONF_HOST: import_data[CONF_HOST],
+            CONF_PORT: import_data.get(CONF_PORT, DEFAULT_PORT),
+        }
+        data[CONF_HOST] = data[CONF_HOST].strip()
+        await self.async_set_unique_id(f"{data[CONF_HOST]}:{data[CONF_PORT]}")
+        self._abort_if_unique_id_configured()
+
+        return self.async_create_entry(
+            title=DEFAULT_NAME,
+            data={
+                CONF_HOST: data[CONF_HOST],
+                CONF_PORT: data[CONF_PORT],
+            },
+        )
+
     @staticmethod
     @callback
     def async_get_options_flow(
