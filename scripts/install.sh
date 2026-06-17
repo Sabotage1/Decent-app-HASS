@@ -69,7 +69,53 @@ if [[ -z "$REAPRIME_HOST" ]]; then
   exit 1
 fi
 
-python3 "$REPO_ROOT/scripts/install_config.py" "$CONFIG_DIR" "$REAPRIME_HOST"
+CONFIG_FILE="$CONFIG_DIR/configuration.yaml"
+touch "$CONFIG_FILE"
+
+if grep -Eq '^(decent_reaprime|lovelace):' "$CONFIG_FILE"; then
+  echo
+  echo "The installer found an existing decent_reaprime: or lovelace: block in:"
+  echo "$CONFIG_FILE"
+  echo
+  echo "To avoid overwriting your Home Assistant YAML, add/update this manually:"
+  echo
+  cat <<EOF
+decent_reaprime:
+  host: $REAPRIME_HOST
+  port: 8080
+
+lovelace:
+  dashboards:
+    decent-espresso:
+      mode: yaml
+      title: Decent Espresso
+      icon: mdi:coffee-maker
+      show_in_sidebar: true
+      filename: dashboards/decent_espresso_dashboard.yaml
+EOF
+  echo
+  echo "The integration files and dashboard file were installed successfully."
+  echo "After editing configuration.yaml, restart Home Assistant."
+  exit 0
+fi
+
+cat >> "$CONFIG_FILE" <<EOF
+
+decent_reaprime:
+  host: $REAPRIME_HOST
+  port: 8080
+
+lovelace:
+  dashboards:
+    decent-espresso:
+      mode: yaml
+      title: Decent Espresso
+      icon: mdi:coffee-maker
+      show_in_sidebar: true
+      filename: dashboards/decent_espresso_dashboard.yaml
+EOF
+
+echo "Updated Home Assistant YAML configuration"
 
 echo
 echo "Install complete."

@@ -30,6 +30,10 @@ curl -fsSL https://raw.githubusercontent.com/Sabotage1/Decent-app-HASS/main/scri
 
 The script installs the custom integration, installs the dashboard, then asks for the ReaPrime/Decent Espresso app IP address at the end. Restart Home Assistant when it finishes.
 
+The installer does not require Python. If your `configuration.yaml` already
+contains custom `lovelace:` or `decent_reaprime:` YAML, it installs the files
+and prints the snippet to merge manually.
+
 For non-interactive installs:
 
 ```bash

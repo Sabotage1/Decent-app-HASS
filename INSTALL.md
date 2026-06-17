@@ -76,8 +76,11 @@ enter the IP address of the tablet or computer running the app, for example:
 Then restart Home Assistant. After restart, Home Assistant imports the Decent
 Espresso integration from YAML and shows the dashboard in the sidebar.
 
-The script creates a backup of `configuration.yaml` before merging with an
-existing `lovelace:` or `decent_reaprime:` block.
+The Home Assistant SSH add-on does not always include Python. The installer
+does not require Python for a normal install. If your `configuration.yaml`
+already has a `lovelace:` or `decent_reaprime:` block, the script installs the
+files and prints a YAML snippet for you to merge manually instead of changing
+your existing YAML automatically.
 
 ## Manual Install in Home Assistant
 
