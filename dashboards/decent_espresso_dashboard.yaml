@@ -84,17 +84,32 @@ views:
               green: 88
               yellow: 96
               red: 101
-          - type: gauge
-            entity: sensor.decent_espresso_scale_weight
-            name: Scale
-            unit: g
-            min: 0
-            max: 60
-            needle: true
-            severity:
-              green: 0
-              yellow: 35
-              red: 50
+          - type: conditional
+            conditions:
+              - entity: binary_sensor.decent_espresso_scale_connected
+                state: "on"
+            card:
+              type: gauge
+              entity: sensor.decent_espresso_scale_weight
+              name: Scale
+              unit: g
+              min: 0
+              max: 60
+              needle: true
+              severity:
+                green: 0
+                yellow: 35
+                red: 50
+          - type: conditional
+            conditions:
+              - entity: binary_sensor.decent_espresso_scale_connected
+                state_not: "on"
+            card:
+              type: tile
+              entity: binary_sensor.decent_espresso_scale_connected
+              name: Scale disconnected
+              icon: mdi:scale-balance
+              color: grey
 
       - type: horizontal-stack
         cards:
