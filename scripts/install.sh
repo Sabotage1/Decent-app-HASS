@@ -52,8 +52,18 @@ echo "Installing dashboard YAML into $CONFIG_DIR/dashboards/decent_espresso_dash
 mkdir -p "$CONFIG_DIR/dashboards"
 cp "$REPO_ROOT/dashboards/decent_espresso_dashboard.yaml" "$CONFIG_DIR/dashboards/decent_espresso_dashboard.yaml"
 
-echo
-read -r -p "Enter the ReaPrime/Decent Espresso app IP or hostname: " REAPRIME_HOST
+if [[ -z "${REAPRIME_HOST:-}" ]]; then
+  echo
+  if [[ -r /dev/tty ]]; then
+    read -r -p "Enter the ReaPrime/Decent Espresso app IP or hostname: " REAPRIME_HOST < /dev/tty
+  else
+    echo "Could not prompt for the ReaPrime/Decent Espresso app IP or hostname."
+    echo "Run again with REAPRIME_HOST set, for example:"
+    echo "curl -fsSL https://raw.githubusercontent.com/Sabotage1/Decent-app-HASS/main/scripts/install.sh | REAPRIME_HOST=192.168.1.50 bash"
+    exit 1
+  fi
+fi
+
 if [[ -z "$REAPRIME_HOST" ]]; then
   echo "IP/hostname cannot be empty."
   exit 1

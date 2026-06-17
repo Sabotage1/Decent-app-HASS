@@ -30,6 +30,12 @@ curl -fsSL https://raw.githubusercontent.com/Sabotage1/Decent-app-HASS/main/scri
 
 The script installs the custom integration, installs the dashboard, then asks for the ReaPrime/Decent Espresso app IP address at the end. Restart Home Assistant when it finishes.
 
+For non-interactive installs:
+
+```bash
+curl -fsSL https://raw.githubusercontent.com/Sabotage1/Decent-app-HASS/main/scripts/install.sh | REAPRIME_HOST=192.168.1.50 bash
+```
+
 ### HACS custom repository
 
 1. In HACS, add this repository as a custom integration repository.

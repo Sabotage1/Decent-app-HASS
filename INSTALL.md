@@ -46,10 +46,19 @@ Run this from the Home Assistant terminal:
 curl -fsSL https://raw.githubusercontent.com/Sabotage1/Decent-app-HASS/main/scripts/install.sh | bash
 ```
 
+The script prompts for the ReaPrime/Decent Espresso app IP address even when it
+is installed with `curl | bash`.
+
 If your Home Assistant config directory is not `/config`, set it explicitly:
 
 ```bash
 curl -fsSL https://raw.githubusercontent.com/Sabotage1/Decent-app-HASS/main/scripts/install.sh | HA_CONFIG_DIR=/path/to/config bash
+```
+
+For a fully non-interactive install, pass the IP address with `REAPRIME_HOST`:
+
+```bash
+curl -fsSL https://raw.githubusercontent.com/Sabotage1/Decent-app-HASS/main/scripts/install.sh | REAPRIME_HOST=192.168.1.50 bash
 ```
 
 When the script asks:
