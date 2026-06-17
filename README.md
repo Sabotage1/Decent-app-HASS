@@ -34,6 +34,9 @@ The installer does not require Python. If your `configuration.yaml` already
 contains custom `lovelace:` or `decent_reaprime:` YAML, it installs the files
 and prints the snippet to merge manually.
 
+For fresh/default configs, it appends the YAML with extra spacing and keeps
+normal UI-controlled dashboards in storage mode.
+
 For non-interactive installs:
 
 ```bash

@@ -80,11 +80,14 @@ if grep -Eq '^(decent_reaprime|lovelace):' "$CONFIG_FILE"; then
   echo "To avoid overwriting your Home Assistant YAML, add/update this manually:"
   echo
   cat <<EOF
+
+# Decent Espresso Home Assistant Connector
 decent_reaprime:
   host: $REAPRIME_HOST
   port: 8080
 
 lovelace:
+  mode: storage
   dashboards:
     decent-espresso:
       mode: yaml
@@ -101,11 +104,14 @@ fi
 
 cat >> "$CONFIG_FILE" <<EOF
 
+
+# Decent Espresso Home Assistant Connector
 decent_reaprime:
   host: $REAPRIME_HOST
   port: 8080
 
 lovelace:
+  mode: storage
   dashboards:
     decent-espresso:
       mode: yaml
